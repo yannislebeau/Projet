@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
 
-class GameAdapter(private val dataSet: Array<String>) :
+class GameAdapter(private var dataSet: List<Game>) :
     RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
     /**
@@ -19,8 +19,12 @@ class GameAdapter(private val dataSet: Array<String>) :
 
         init {
             // Define click listener for the ViewHolder's View.
-            textView = view.findViewById(R.id.textView)
+            textView = view.findViewById(R.id.game_name)
         }
+    }
+    fun updatelist(list: List<Game>){
+        dataSet = list
+        notifyDataSetChanged()
     }
 
     // Create new views (invoked by the layout manager)
@@ -37,7 +41,8 @@ class GameAdapter(private val dataSet: Array<String>) :
 
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
-        viewHolder.textView.text = dataSet[position]
+        val Game :Game = dataSet[position]
+        viewHolder.textView.text = Game.name
     }
 
     // Return the size of your dataset (invoked by the layout manager)
