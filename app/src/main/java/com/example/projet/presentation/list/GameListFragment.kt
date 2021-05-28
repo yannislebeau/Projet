@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
 import com.example.projet.presentation.api.GameAPI
-import com.example.projet.presentation.api.Gameresponse
+import com.example.projet.presentation.api.Gamelistresponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -22,7 +23,10 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 class GameListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
-    private val adapter = GameAdapter(listOf())
+    private val adapter = GameAdapter(listOf(), ::onClickedGame)
+
+
+
     private val layoutManager = LinearLayoutManager(context)
 
     override fun onCreateView(
@@ -40,22 +44,17 @@ class GameListFragment : Fragment() {
         recyclerView.layoutManager = this@GameListFragment.layoutManager
         recyclerView.adapter = this@GameListFragment.adapter
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://pokeapi.co/api/v2/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val gameAPI: GameAPI = retrofit.create(GameAPI::class.java)
-        gameAPI.getGameList("100").enqueue(object: Callback<Gameresponse>{
-            override fun onFailure(call: Call<Gameresponse>, t: Throwable)
+        Singleton.gameAPI.getGameList("100").enqueue(object: Callback<Gamelistresponse>{
+            override fun onFailure(call: Call<Gamelistresponse>, t: Throwable)
             {
                 TODO("Not yet implemented")
             }
 
-            override fun onResponse(call: Call<Gameresponse>, response: Response<Gameresponse>)
+            override fun onResponse(call: Call<Gamelistresponse>, response: Response<Gamelistresponse>)
             {
                 if (response.isSuccessful && response.body() != null){
-                   val gameResponse: Gameresponse =  response.body()!!
+                   val gameResponse: Gamelistresponse =  response.body()!!
                     adapter.updatelist(gameResponse.results)
                 }
             }
@@ -66,7 +65,9 @@ class GameListFragment : Fragment() {
 
 
     }
-
+    private fun onClickedGame(game: Game) {
+        findNavController().navigate(R.id.NavigateToGameDetailFragment)
+    }
 
 
 
