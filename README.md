@@ -13,7 +13,7 @@ Pour rélaiser ce projet j'ai recouru notamment à l'utilisation de :
 - Requête à une APIRest
 - Un Singleton
 
-## Screens ##
+### Screens ###
 https://github.com/yannislebeau/Projet/blob/master/Screen/screen1.PNG
 https://github.com/yannislebeau/Projet/blob/master/Screen/screen2.PNG
 
