@@ -34,8 +34,9 @@ class GameDetailFragment : Fragment() {
         textVieweffect = view.findViewById(R.id.Gamedetail_effect)
        callAPI()
     }
-    val id = arguments?.getInt("GameID") ?: -1
     private fun callAPI(){
+    val id = arguments?.getInt("GameID") ?: -1
+
     Singleton.gameAPI.getGameDetail(id).enqueue(object: Callback<Gamedetailresponse>{
         override fun onFailure(call: Call<Gamedetailresponse>, t: Throwable)
         {

@@ -7,8 +7,8 @@ data class Gamedetailresponse (
 
 
 data class Gameslot (
-    val langue1 : Paquet1,
-    val langue2 : Paquet2
+    val deutsch_effect : Paquet1,
+    val english_effect : Paquet2
 )
 
 data class Paquet1 (
