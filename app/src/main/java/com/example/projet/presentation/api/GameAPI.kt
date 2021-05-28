@@ -10,5 +10,5 @@ interface GameAPI {
     fun getGameList(@Query(  "limit") limit: String): Call<Gamelistresponse>
 
     @GET("ability/{id}")
-    fun getGameDetail(@Path("id")  id: String): Call<Gamedetailresponse>
+    fun getGameDetail(@Path("id")  id: Int): Call<Gamedetailresponse>
 }

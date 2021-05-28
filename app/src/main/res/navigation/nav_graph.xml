@@ -20,7 +20,10 @@
         android:name="com.example.projet.presentation.detail.GameDetailFragment"
         android:label="@string/second_fragment_label"
         tools:layout="@layout/fragment_game_detail">
-
+        <argument
+            android:name="GameID"
+            app:argType="integer"
+            android:defaultValue="-1"/>
         <action
             android:id="@+id/NavigateToGameListFragment"
             app:destination="@id/GameListFragment" />

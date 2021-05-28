@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
 
-class GameAdapter(private var dataSet: List<Game>, val listener: ((Game)->Unit)? = null) :
+class GameAdapter(private var dataSet: List<Game>, val listener: ((Int)->Unit)? = null) :
     RecyclerView.Adapter<GameAdapter.ViewHolder>() {
 
     /**
@@ -45,7 +45,7 @@ class GameAdapter(private var dataSet: List<Game>, val listener: ((Game)->Unit)?
         val game :Game = dataSet[position]
         viewHolder.textView.text = game.name
         viewHolder.itemView.setOnClickListener {
-            listener?.invoke(game)
+            listener?.invoke(position)
         }
     }
 
