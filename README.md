@@ -14,6 +14,7 @@ Pour rélaiser ce projet j'ai recouru notamment à l'utilisation de :
 - Un Singleton
 
 ## Screens ##
-
+https://github.com/yannislebeau/Projet/blob/master/Screen/screen1.PNG
+https://github.com/yannislebeau/Projet/blob/master/Screen/screen2.PNG
 
 Merci pour votre lecture et bonne découverte !
