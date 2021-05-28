@@ -10,13 +10,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projet.R
-import com.example.projet.presentation.api.GameAPI
 import com.example.projet.presentation.api.Gamelistresponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 /**
@@ -42,30 +39,34 @@ class GameListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         recyclerView = view.findViewById(R.id.game_recyclerview)
-        recyclerView.layoutManager = this@GameListFragment.layoutManager
-        recyclerView.adapter = this@GameListFragment.adapter
-
-
-        Singleton.gameAPI.getGameList("100").enqueue(object: Callback<Gamelistresponse>{
-            override fun onFailure(call: Call<Gamelistresponse>, t: Throwable)
-            {
+        recyclerView.apply {
+            layoutManager = this@GameListFragment.layoutManager
+            adapter = this@GameListFragment.adapter
+        }
+        Singleton.gameAPI.getGameList("100").enqueue(object : Callback<Gamelistresponse> {
+            override fun onFailure(call: Call<Gamelistresponse>, t: Throwable) {
                 TODO("Not yet implemented")
             }
 
-            override fun onResponse(call: Call<Gamelistresponse>, response: Response<Gamelistresponse>)
-            {
-                if (response.isSuccessful && response.body() != null){
-                   val gameResponse: Gamelistresponse =  response.body()!!
+            override fun onResponse(
+                call: Call<Gamelistresponse>,
+                response: Response<Gamelistresponse>
+            ) {
+                if (response.isSuccessful && response.body() != null) {
+                    val gameResponse: Gamelistresponse = response.body()!!
                     adapter.updatelist(gameResponse.results)
                 }
             }
         })
 
-
-
-
-
     }
+
+
+
+
+
+
+
     private fun onClickedGame(id: Int) {
         findNavController().navigate(R.id.NavigateToGameDetailFragment, bundleOf(
             "GameID" to (id +1)
